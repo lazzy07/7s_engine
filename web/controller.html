@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Controller</title>
+    <link rel="stylesheet" type="text/css" href="./resources/require/fonts/fonts.css" />
+    <link href="resources/require/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./resources/controller.css" />
+    <script type="text/javascript" src="resources/require/bootstrap/js/angular.min.js"></script>
+    <script type="text/javascript" src="resources/require/bootstrap/js/angular-route.min.js"></script>
+    <script type="text/javascript" src="resources/require/bootstrap/js/socket.io.js"></script>
+</head>
+<body ng-app="IdeApp">
+    <!-- Image and text -->
+    <nav class="navbar navbar-light bg-light">
+      <span class="navbar-text">
+        Created by Lasantha M
+      </span>
+    </nav>
+
+
+    <!--  NAVBAR  -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Controller Tagby 7's</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link dataControl active" href="#">Data Control</a>
+                <a class="nav-item nav-link monitorControl" href="#">Monitor Control</a>
+                <a class="nav-item nav-link editTeam" href="#">Edit Team</a>
+                <a class="nav-item nav-link editMatches" href="#">Edit Matches</a>
+            </div>
+        </div>
+    </nav>
+    <br/>
+
+
+
+    <!--  ERROR HANDLER  -->
+    <div id="EH" class="container-fluid" ng-controller="ErrorControl">
+        <div ng-click = "getError()" class="alert alert-danger errorClick" role="alert">
+            <h4 class="alert-heading">Error !!!!!</h4>
+            <p>Aww snap    :::::        Error caught!!!</p>
+            <hr>
+            <p class="mb-0">{{error}}</p>
+        </div>
+    </div>
+
+
+
+    <!--  DATA HANDLER  -->
+    <div id="DC" class="container-fluid" ng-controller="DataControl">
+        {{hello}}
+    </div>
+
+
+
+    <!--  MONITOR CONTROLLER  -->
+    <div id="MC" class="container-fluid" ng-controller="MonitorCtrl">
+        <div class="clickMe" ng-click = "monitorGet()"></div>
+        <div ng-repeat="monitor in monitors">
+            <div class="container-fluid MonitorClick">
+                <div ng-class ="setStateClass(monitor.state)" class="jumbotron jumbotron-fluid" >
+                    <div class="container">
+                        <h1 ng-if="monitor.state" class="display-3 col-xs-10">{{monitor.name}}</h1>
+                        <h1 class="glyphicon glyphicon-blackboard"></h1>
+                        <p class="lead">{{monitor.state}}</p>
+
+                        <ul class="list-group">
+                            <li id="startScreen" ng-init="hover1 = false" ng-class="{active : hover1 ,}" ng-mouseenter="hover1 = true" ng-mouseleave="hover1 = false" ng-click="clickOn('Start Screen',monitor)" class="list-group-item monitorStateSelector">Start Screen</li>
+                            <li id="scoreboard" ng-init="hover2 = false" ng-class="{active : hover2}" ng-mouseenter="hover2 = true" ng-mouseleave="hover2 = false" ng-click="clickOn('Scoreboard',monitor)" class="list-group-item monitorStateSelector">Scoreboard</li>
+                            <li id="nextMatch" ng-init="hover3 = false" ng-class="{active : hover3}" ng-mouseenter="hover3 = true" ng-mouseleave="hover3 = false" ng-click="clickOn('Next Match',monitor)" class="list-group-item monitorStateSelector">Next Match</li>
+                            <li id="team2Lineup" ng-init="hover4 = false" ng-class="{active : hover4}" ng-mouseenter="hover4 = true" ng-mouseleave="hover4 = false" ng-click="clickOn('2 Team Lineup',monitor)" class="list-group-item monitorStateSelector">2 Team Lineup</li>
+                            <li id="formation" ng-init="hover5 = false" ng-class="{active : hover5}" ng-mouseenter="hover5 = true" ng-mouseleave="hover5 = false" ng-click="clickOn('Team Formation',monitor)" class="list-group-item monitorStateSelector">Team Formation</li>
+                            <li id="matchFixtures" ng-init="hover6 = false" ng-class="{active : hover6}" ng-mouseenter="hover6 = true" ng-mouseleave="hover6 = false" ng-click="clickOn('Match Fixtures',monitor)" class="list-group-item monitorStateSelector">Match Fixtures</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!--  EDIT TEAMS  -->
+    <div id="ET" class="container-fluid" ng-controller="EditTeam">
+        {{hello}}
+    </div>
+
+
+    <!--  EDIT MATCHES  -->
+    <div id="EM" class="container-fluid" ng-controller="EditMatches">
+        {{hello}}
+    </div>
+
+
+    <script src="resources/require/bootstrap/js/jquery-3.1.0.min.js"></script>
+    <script src="resources/require/bootstrap/js/jquery-ui.min.js"></script>
+    <script src="resources/require/bootstrap/js/popper.js"></script>
+    <script src="resources/require/bootstrap/js/bootstrap.min.js"></script>
+    <script src="resources/app.js"></script>
+</body>
+</html>

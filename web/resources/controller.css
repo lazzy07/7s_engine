@@ -1,0 +1,7 @@
+.monitorStateSelector{
+    cursor : pointer;
+}
+
+.monitorStateSelectorHover {
+    background-color: darkgray;
+}

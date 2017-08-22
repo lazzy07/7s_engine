@@ -1,0 +1,40 @@
+body{
+
+}
+
+.check{
+    background-color: black;
+}
+
+.formClass{
+    color: white;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.textClass{
+    color: white;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.aboutClass{
+    color: white;
+    position: absolute;
+    bottom: 2%;
+}
+
+.space{
+    color: white;
+    height: 10px;
+    width: 100%;
+}
+
+.colorize{
+    background-color: #05f26c;
+    color: #340040;
+}

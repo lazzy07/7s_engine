@@ -1,0 +1,1047 @@
+html {
+    margin: 0;
+    overflow: hidden;
+    display:inline-block
+}
+
+body{
+    position: relative;
+    background-color: #222;
+}
+
+
+
+
+
+
+
+.startPage{
+    visibility: hidden;
+}
+
+#tvLogo{
+    visibility: hidden;
+}
+
+#videoClass{
+    visibility: visible;
+    margin: 0;
+    left: 0;
+    top: 0;
+}
+#nowPlaying{
+    visibility: hidden;
+}
+
+#teamf2Sheet{
+    visibility: hidden;
+}
+
+#scoreboard{
+    visibility: hidden;
+}
+
+#lineup1Team{
+    visibility: hidden;
+}
+
+#closeScr{
+    visibility: hidden;
+}
+
+#fixtureClass{
+    visibility: hidden;
+}
+
+.monitorRegister{
+    visibility: visible;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+#team1Sheet{
+    visibility: hidden;
+}
+
+#team1SheetS{
+    visibility: visible;
+}
+
+#team2Sheet{
+    visibility: hidden;
+}
+
+#team2SheetS{
+    visibility: visible;
+}
+
+#numberClass1{
+    visibility: hidden;
+}
+
+#numberClass1S{
+    visibility: visible;
+}
+
+#numberClass2{
+    visibility: hidden;
+}
+
+#numberClass2S{
+    visibility: visible;
+}
+*/
+
+/*
+#team1SheetL{
+    visibility: hidden;
+}
+
+#team1SheetLS{
+    visibility: visible;
+}
+
+#numberClass1L{
+    visibility: hidden;
+}
+
+#numberClass1LS{
+    visibility: visible;
+}
+*/
+
+
+
+
+.defFont{
+    font-family: 'Proxima Nova', Georgia, sans-serif;
+    color: white;
+}
+
+
+.logo{
+    width: 15em;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+}
+
+#outer{
+    left: 50%;
+}
+
+#inner{
+    opacity: 1;
+}
+
+#videoClass{
+    opacity: 0.7;
+}
+
+.startPage{
+    opacity: 1;
+}
+
+#startBack{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    height: 90%;
+    transform: translate(-50%,-50%);
+    background-color: rgba(7,242,242,0.7);
+
+}
+
+#orgBy{
+    font-size: 2em;
+    position: absolute;
+    bottom: 5%;
+    left: 90%;
+    transform: translate(-100%,-100%);
+    color: #340040;
+    white-space:nowrap;
+}
+
+#orgByTag{
+    font-size: 2em;
+    position: absolute;
+    top: 7%;
+    left: 7%;
+    color: #340040;
+    white-space:nowrap;
+}
+
+.topic{
+    color: #340040;
+    font-family: 'Proxima Nova', Georgia, sans-serif;
+}
+
+#topic1{
+    font-size: 2em;
+    position: absolute;
+    left: 50%;
+    top: 65%;
+    transform: translate(-50%, -50%);
+}
+
+#topic2{
+    font-size: 3.5em;
+    position: absolute;
+    left: 50%;
+    top: 75%;
+    transform: translate(-50%, -50%);
+}
+
+#logoOuter{
+    width: 5em;
+    position: absolute;
+    left: 92.3%;
+    top: 81.5%;
+    transform: translate(-50%, -50%);
+}
+
+.logoTopic{
+    color: white;
+    font-family: 'Proxima Nova', Georgia, sans-serif;
+    position: absolute;
+    right: 2%;
+}
+
+#logoTopic1{
+    font-size: 1em;
+    right: -2%;
+    bottom: 3.5%;
+    transform: translate(-50%, -100%);
+}
+
+
+#logoTopic2{
+    font-size: 1.5em;
+    right: -0.5%;
+    bottom: 0;
+    transform: translate(-50%, -50%);
+}
+
+#sideScreen1{
+    background-color: #07f2f2;
+    opacity: 0.7;
+    position: absolute;
+    width: 25%;
+    height: 80%;
+    left: 0;
+    top: 10%;
+}
+
+#sideScreen2{
+    background-color: #07f2f2;
+    opacity: 0.7;
+    position: absolute;
+    width: 14%;
+    height: 80%;
+    right: 0;
+    top: 10%;
+}
+
+.nowTeamsClass{
+    font-size: 4em;
+    background-color: #340040;
+    padding: 5px;
+}
+
+#team2Div{
+    position: absolute;
+    left: 90px;
+    white-space:nowrap;
+}
+
+#magentaImg{
+    width: 5em;
+}
+#magentaH{
+    font-size: 1.5em;
+    color: #340040;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    white-space:nowrap;
+    left: 50%;
+}
+
+#magentaH2{
+    font-size: 1em;
+    color: #340040;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    white-space:nowrap;
+    left: 50%;
+    top: 130%;
+}
+
+#hashTag{
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #340040;
+    background-color: #07f2f2;
+    position: absolute;
+    left: 90px;
+    top: 212%;
+}
+
+#antiR{
+    font-size: 1em;
+    background-color: #340040;
+    color: #07f2f2;
+    position: absolute;
+    left: 0;
+    top: -8%;
+    transform: translate(0%,-100%);
+}
+
+#nowplTag{
+    padding: 5px 10px;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%,-100%);
+    font-size: 3em;
+    background-color: #340040;
+    color: #07f2f2;
+}
+
+#nowpldownTag{
+    font-size: 1.1em;
+    background-color: #07f2f2;
+    color: #340040;
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    padding: 5px 20px;
+    transform: translate(-50%,0%);
+}
+
+#nowTeams{
+    position: absolute;
+    top: 40%;
+    left: 15%;
+}
+#magentaLogo{
+    position: absolute;
+    top: 45%;
+    right: 4%;
+}
+#sideScreen{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left:0;
+    top: 0;
+}
+
+
+.teamSheet{
+    position: absolute;
+    top: 20%;
+}
+
+#team1Sheet{
+    left:45%;
+    transform: translate(-100%,0);
+}
+
+#team2Sheet{
+    left:55%;
+}
+
+#team1SheetS{
+    left:45%;
+    transform: translate(-100%,0);
+}
+
+#team2SheetS{
+    left:55%;
+}
+
+.tName{
+    font-size: 1.5em;
+    padding: 20px 10px;
+    color: white;
+    background-color: #340040;
+    width: 380px;
+    margin: 0;
+}
+
+.tNameS{
+    font-size: 1.5em;
+    padding: 20px 10px;
+    color: white;
+    background-color: #340040;
+    width: 380px;
+    margin: 0;
+}
+
+#t1n1S{
+    background-color: #340040;
+}
+
+#t1e1LS{
+    color: white;
+    background-color: #340040;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #340040;
+}
+
+#t2n1S{
+    background-color: #340040;
+}
+
+#t1e1S{
+    color: white;
+    background-color: #340040;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #340040;
+}
+
+#t2e1S{
+    color: white;
+    background-color: #340040;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #340040;
+}
+
+#t1n1LS{
+    color: #340040;
+    background-color: #340040;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #340040;
+}
+
+#middleLogo{
+    width: 10%;
+    height: 10%;
+    position: absolute;
+    left: 50%;
+    top: 20%;
+    width: 10%;
+    background-color: #07f2f2;
+    transform: translate(-50%,0%);
+}
+
+#middleLogoImg{
+    position: absolute;
+    width: 3em;
+    left: 50%;
+    top: 21%;
+    transform: translate(-50%,0%);
+}
+
+#sideScreen3{
+    background-color: #07f2f2;
+    opacity: 0.7;
+    position: absolute;
+    width: 25%;
+    height: 80%;
+    left: -2%;
+    top: 10%;
+}
+
+#sideScreen4{
+    background-color: #07f2f2;
+    opacity: 0.7;
+    position: absolute;
+    width: 14%;
+    height: 80%;
+    right: -1%;
+    top: 10%;
+}
+
+#magentaLogo2{
+    position: absolute;
+    top: 45%;
+    right: 4%;
+}
+
+#magentaImg2{
+    width: 5em;
+}
+
+#magenta2H{
+    font-size: 1.5em;
+    color: #340040;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    white-space:nowrap;
+    left: 50%;
+}
+
+#magenta2H2{
+    font-size: 1em;
+    color: #340040;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    white-space:nowrap;
+    left: 50%;
+    top: 130%;
+}
+
+.entry{
+    font-size: 1.5em;
+    background-color: #e6e6e6;
+    color: #340040;
+    padding: 10px 5px;
+    margin: 0;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #07f2f2;
+}
+
+.tNo{
+    opacity: 0;
+    font-size: 1.5em;
+    padding: 20px 10px;
+    color: white;
+    background-color: #340040;
+    margin: 0;
+}
+
+#numberClass1{
+    position: absolute;
+    top: 20%;
+    left: calc(45% - 45px);
+    width: 45px;
+    white-space:nowrap;
+}
+
+#numberClass1S{
+    position: absolute;
+    top: 20%;
+    left: calc(45% - 45px);
+    width: 45px;
+    white-space:nowrap;
+}
+
+#numberClass2{
+    position: absolute;
+    top: 20%;
+    left: calc(55% + 350px + 50px);
+    width: 45px;
+    white-space:nowrap;
+    transform: translate(-100%,0);
+}
+
+#numberClass2S{
+    position: absolute;
+    top: 20%;
+    left: calc(55% + 350px + 50px);
+    width: 45px;
+    white-space:nowrap;
+    transform: translate(-100%,0);
+}
+
+
+.noE{
+    width: 35px;
+    font-size: 1.5em;
+    background-color: #07f2f2;
+    color: #340040;
+    padding: 10px 5px;
+    margin: 0;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #340040;
+}
+
+#team2Topic{
+    font-size: 2em;
+    padding: 10px 40px;
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%,-100%);
+    background-color: #340040;
+    color: #07f2f2;
+}
+
+#team2subTopic{
+    position: absolute;
+    font-size: 1.5em;
+    padding: 0;
+    background-color: #07f2f2;
+    bottom: 10%;
+    left: 50%;
+    transform: translate(-50%,0%);
+    color: #340040;
+}
+
+.scrName{
+    position: absolute;
+    color: #05f26c;
+    font-size: 4em;
+    background-color: #340040;
+    white-space:nowrap;
+    padding: 10px 20px;
+}
+
+.scrScore{
+    position: absolute;
+    color: #05f26c;
+    font-size: 10em;
+    background-color: #340040;
+}
+
+.scrScore{
+    position: absolute;
+    color: #05f26c;
+    font-size: 13em;
+    background-color: #340040;
+    padding: 40px 70px;
+}
+
+#scrLogo{
+    position: absolute;
+    transform: translate(-50%,-100%);
+    left: 50%;
+    top: 55%;
+    width: 12em;
+    padding: 10px 10px;
+    background: #05f26c;
+}
+
+#scrTeam1{
+    transform: translate(-100%,-50%);
+    left: 40%;
+    top: 50%;
+}
+
+#scrTeam2{
+    transform: translate(0%,-50%);
+    left: 60%;
+    top: 50%;
+}
+
+#scrScore1{
+    transform: translate(-100%,-100%);
+    left: 35%;
+    top: 40%;
+}
+
+#scrScore2{
+    transform: translate(-100%,-100%);
+    left: 85%;
+    top: 40%;
+}
+
+#scrState{
+    position: absolute;
+    color: #340040;
+    font-size: 2em;
+    transform: translate(-50%,-100%);
+    background-color: #05f26c;
+    padding: 10px 50px;
+    left: 50%;
+    bottom: 25%;
+}
+
+#scrClock{
+    position: absolute;
+    color: #05f26c;
+    font-size: 6em;
+    transform: translate(-50%,0%);
+    background-color: #340040;
+    padding: 10px 100px;
+    left: 50%;
+    bottom: 17%;
+    letter-spacing: 80px;
+}
+
+
+#scrMatch{
+    position: absolute;
+    color: #340040;
+    font-size: 2em;
+    transform: translate(-50%,0%);
+    background-color: #05f26c;
+    padding: 10px 50px;
+    left: 50%;
+    bottom: 10%;
+}
+
+#sideScreen1Scr{
+    background-color: #05f26c;
+    opacity: 0.7;
+    position: absolute;
+    width: 25%;
+    height: 80%;
+    left: -2%;
+    top: 10%;
+}
+
+#sideScreen2Scr{
+    background-color: #05f26c;
+    opacity: 0.7;
+    position: absolute;
+    width: 14%;
+    height: 80%;
+    right: -1%;
+    top: 10%;
+}
+
+#magentaLogoScr{
+    position: absolute;
+    top: 45%;
+    right: 4%;
+}
+
+#magentaImgScr{
+    width: 5em;
+}
+
+#magenta2HScr{
+    font-size: 1.5em;
+    color: #340040;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    white-space:nowrap;
+    left: 50%;
+}
+
+#magenta2H2Scr{
+    font-size: 1em;
+    color: #340040;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    white-space:nowrap;
+    left: 50%;
+    top: 130%;
+}
+
+#sideScreen3L{
+    background-color: #07f2f2;
+    opacity: 0.7;
+    position: absolute;
+    width: 25%;
+    height: 80%;
+    left: -2%;
+    top: 10%;
+}
+
+#sideScreen4L{
+    background-color: #07f2f2;
+    opacity: 0.7;
+    position: absolute;
+    width: 14%;
+    height: 80%;
+    right: -1%;
+    top: 10%;
+}
+
+#team1SheetL{
+    left:45%;
+    transform: translate(-100%,0);
+}
+
+#team1SheetLS{
+    left:45%;
+    transform: translate(-100%,0);
+}
+
+#numberClass1L{
+    position: absolute;
+    top: 20%;
+    left: calc(45% - 45px);
+    width: 45px;
+    white-space:nowrap;
+}
+
+#numberClass1LS{
+    position: absolute;
+    top: 20%;
+    left: calc(45% - 45px);
+    width: 45px;
+    white-space:nowrap;
+}
+
+#formationDiv{
+    position: absolute;
+    background-color: #e6e6e6;
+    top: 17%;
+    left:55%;
+    width: 450px;
+    height: 500px;
+    transform: translate(0,0);
+}
+
+
+#numberClass1LF{
+    position: absolute;
+    width: 450px;
+    height: 500px;
+    top: 17%;
+    left: 55%;
+    white-space:nowrap;
+}
+
+.noEF{
+     width: 35px;
+     font-size: 1.5em;
+     background-color: #340040;
+     color: #07f2f2;
+     padding: 10px 5px;
+     margin: 0;
+ }
+
+#t1n1LF{
+    position: absolute;
+    top: 15%;
+    left:10%;
+}
+
+#t1n2LF{
+    position: absolute;
+    top: 15%;
+    left:50%;
+}
+
+#t1n3LF{
+    position: absolute;
+    top: 15%;
+    left:85%;
+}
+
+#t1n4LF{
+    position: absolute;
+    top: 40%;
+    left:25%;
+}
+
+#t1n5LF{
+    position: absolute;
+    top: 40%;
+    left:75%;
+}
+
+#t1n6LF{
+    position: absolute;
+    top: 70%;
+    left:25%;
+}
+
+#t1n7LF{
+    position: absolute;
+    top: 70%;
+    left:75%;
+}
+
+#formationTopic{
+    font-weight: bold;
+    font-size: 1.8em;
+    position: absolute;
+    width: 440px;
+    padding: 10px 0 10px 10px;
+    background-color: #340040;
+    color: white;
+    left:55%;
+    top: 17%;
+    transform: translate(0,-50%);
+}
+
+#magentaLogo2F{
+    position: absolute;
+    top: 45%;
+    left: 4%;
+}
+
+#magentaImg2F{
+    width: 5em;
+}
+
+#magenta2HF{
+    font-size: 1.5em;
+    color: #340040;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    white-space:nowrap;
+    left: 50%;
+}
+
+#magenta2H2F{
+    font-size: 1em;
+    color: #340040;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    white-space:nowrap;
+    left: 50%;
+    top: 130%;
+}
+
+#closeImg{
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    width: 15em;
+    transform: translate(-50%, -50%);
+}
+
+.closeScrDiv{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #340040;
+}
+
+#closeScrDiv1{
+    font-size: 5em;
+    top: 70%;
+    transform: translate(-50%, -100%);
+    white-space: nowrap;
+}
+
+#closeScrDiv2{
+    font-size: 3em;
+    top: 70%;
+    transform: translate(-50%, 0);
+    white-space: nowrap;
+}
+
+.closeDiv{
+    position: absolute;
+    background-color: #07f2f2;
+    width: 55%;
+    height: 110%;
+    top: 0;
+}
+
+#closeDiv1{
+    left: 0;
+}
+
+#closeDiv2{
+    left: 50%;
+}
+
+#matchFixtures{
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%,0);
+}
+
+.td{
+    display: table-cell;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+    width: 300px;
+    color:#340040;
+    background-color: #e6e6e6;
+    border-bottom: 2px solid #340040;
+    padding: 10px;
+    margin: -2px;
+}
+
+.horizontal{
+    display: table;
+}
+
+.point{
+    background-color: #340040;
+    border-bottom: 2px solid #07f2f2;
+    color : #07f2f2;
+    width: 30px;
+}
+
+.tableCaption{
+    padding: 10px;
+    font-size: 1.8em;
+    background-color: #340040;
+    color: #e6e6e6;
+    text-align: center;
+}
+
+#sideScreen3LM{
+    background-color: #07f2f2;
+    opacity: 0.7;
+    position: absolute;
+    width: 25%;
+    height: 80%;
+    left: -2%;
+    top: 10%;
+}
+
+#sideScreen4LM{
+    background-color: #07f2f2;
+    opacity: 0.7;
+    position: absolute;
+    width: 14%;
+    height: 80%;
+    right: -1%;
+    top: 10%;
+}
+
+#magentaLogo2FM{
+    position: absolute;
+    top: 45%;
+    left: 4%;
+}
+
+#magentaImg2FM{
+    width: 5em;
+}
+
+#magenta2HFM{
+    font-size: 1.5em;
+    color: #340040;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    white-space:nowrap;
+    left: 50%;
+}
+
+#magenta2H2FM{
+    font-size: 1em;
+    color: #340040;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    white-space:nowrap;
+    left: 50%;
+    top: 130%;
+}
+
+.fixCap{
+    padding: 10px;
+    font-size: 1.5em;
+    position: absolute;
+    left: 50%;
+    top: 8%;
+    transform: translate(-50%,-100%);
+    color: #07f2f2;
+    background-color: #340040;
+}
+
+.subfixCap{
+    padding: 5px;
+    font-size: 1.2em;
+    position: absolute;
+    left: 50%;
+    top: 7%;
+    transform: translate(-50%,0%);
+    color: #340040;
+    background-color: #07f2f2;
+}
