@@ -37,7 +37,6 @@
     <br/>
 
 
-
     <!--  ERROR HANDLER  -->
     <div id="EH" class="container-fluid" ng-controller="ErrorControl">
         <div ng-click = "getError()" class="alert alert-danger errorClick" role="alert">
@@ -52,14 +51,122 @@
 
     <!--  DATA HANDLER  -->
     <div id="DC" class="container-fluid" ng-controller="DataControl">
-        {{hello}}
+        <div ng-click="update()" class="dataClick"></div>
+
+        <div class="matchPlaying">
+            <div class="card alert-primary">
+                <div class="card-header alert-primary">
+                    <h3>Now Playing</h3>
+                </div>
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="form-group">
+                                <label class="team1Playing">Team 01</label>
+                                <input class="form-control ppointsTeam1" placeholder="Points">
+                                <small class="form-text text-muted">Team 01 points</small>
+                            </div>
+
+                            <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+
+                            <div class="form-group">
+                                <label class="team2Playing">Team 02</label>
+                                <input class="form-control ppointsTeam2" placeholder="Points">
+                                <small class="form-text text-muted">Team 02 points</small>
+                            </div>
+                        </div>
+                        <br/>
+                        <button type="button" class="btn btn-primary updatePlayingMatch">Update</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="button" class="btn btn-info submitPlayingMatch">Finalize Score</button>
+
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                    </div>
+
+                    <h4 class="card-title">Select Current playing match</h4>
+                    <a ng-repeat="match in matches" ng-click="selectMatch(match)" class="dropdown-item" href="">{{match.name}}  ::   {{match.team1}} - {{match.point1}} vs {{match.team2}} - {{match.point2}}</a>
+                </div>
+            </div>
+        </div>
+
+
+        <br/>
+        <br/>
+
+
+        <div class="timeEdit">
+            <div class="card alert-success">
+                <div class="card-header alert-success">
+                    <h3>Time Change</h3>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">Set Time</h4>
+
+                    <h1 id="displayTime" class="text-center timerClass">00:00</h1>
+                    <h1 class="text-center stateTime">1st half</h1>
+
+                    <div class="container">
+                        <div class="row text-center">
+                            <div class="form-group">
+                                <label>Minutes</label>
+                                <input class="form-control minutesInput" placeholder="00">
+                                <small class="form-text text-muted">Minutes</small>
+                            </div>
+
+                            <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+
+                            <div class="form-group">
+                                <label>Seconds</label>
+                                <input class="form-control pointsTeam2 secondsInput" placeholder="00">
+                                <small class="form-text text-muted">Seconds</small>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <h4 class="card-title">Select Current playing match</h4>
+
+                        <a class="dropdown-item selectTimeState" href="">1st half</a>
+                        <a class="dropdown-item selectTimeState" href="">Interval</a>
+                        <a class="dropdown-item selectTimeState" href="">2nd half</a>
+                        <a class="dropdown-item selectTimeState" href="">Extra</a>
+                        <a class="dropdown-item selectTimeState" href="">Final Score</a>
+
+
+                        <br/>
+                        <button type="button" class="btn btn-success btnTimeUpdate">Update</button>
+                        <button type="button" class="btn btn-warning btnTimePause">Pause</button>
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
     </div>
 
 
 
     <!--  MONITOR CONTROLLER  -->
     <div id="MC" class="container-fluid" ng-controller="MonitorCtrl">
+
         <div class="clickMe" ng-click = "monitorGet()"></div>
+
+        <div class="container-fluid">
+            <button type="button" class="btn btn-info updateTM">Update Team and Match Data</button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-warning updateML">Refresh Monitor List</button>
+        </div>
+
+        <br/>
+        <br/>
+
         <div ng-repeat="monitor in monitors">
             <div class="container-fluid MonitorClick">
                 <div ng-class ="setStateClass(monitor.state)" class="jumbotron jumbotron-fluid" >
@@ -68,18 +175,109 @@
                         <h1 class="glyphicon glyphicon-blackboard"></h1>
                         <p class="lead">{{monitor.state}}</p>
 
-                        <ul class="list-group">
-                            <li id="startScreen" ng-init="hover1 = false" ng-class="{active : hover1 ,}" ng-mouseenter="hover1 = true" ng-mouseleave="hover1 = false" ng-click="clickOn('Start Screen',monitor)" class="list-group-item monitorStateSelector">Start Screen</li>
-                            <li id="scoreboard" ng-init="hover2 = false" ng-class="{active : hover2}" ng-mouseenter="hover2 = true" ng-mouseleave="hover2 = false" ng-click="clickOn('Scoreboard',monitor)" class="list-group-item monitorStateSelector">Scoreboard</li>
-                            <li id="nextMatch" ng-init="hover3 = false" ng-class="{active : hover3}" ng-mouseenter="hover3 = true" ng-mouseleave="hover3 = false" ng-click="clickOn('Next Match',monitor)" class="list-group-item monitorStateSelector">Next Match</li>
-                            <li id="team2Lineup" ng-init="hover4 = false" ng-class="{active : hover4}" ng-mouseenter="hover4 = true" ng-mouseleave="hover4 = false" ng-click="clickOn('2 Team Lineup',monitor)" class="list-group-item monitorStateSelector">2 Team Lineup</li>
-                            <li id="formation" ng-init="hover5 = false" ng-class="{active : hover5}" ng-mouseenter="hover5 = true" ng-mouseleave="hover5 = false" ng-click="clickOn('Team Formation',monitor)" class="list-group-item monitorStateSelector">Team Formation</li>
-                            <li id="matchFixtures" ng-init="hover6 = false" ng-class="{active : hover6}" ng-mouseenter="hover6 = true" ng-mouseleave="hover6 = false" ng-click="clickOn('Match Fixtures',monitor)" class="list-group-item monitorStateSelector">Match Fixtures</li>
+                        <!--  Select data  -->
+                        <div class="container-fluid">
+                            <div class="row">
+                                <input ng-model="monitor.duration" class="col-md-3 form-control" placeholder="Duration">
+                                <input ng-model="monitor.fDuration" class="ml-md-auto col-md-3 form-control" placeholder="Formation Duration">
+                                <input ng-model="monitor.sDuration" class="ml-md-auto col-md-3 form-control" placeholder="Sub Duration">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <br/><br/>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h3>Select Team</h3>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{monitor.teamSelectorName}}
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a ng-click="teamSelect(team,$parent.$index)" ng-repeat="team in teams" class="dropdown-item" href="">{{team.teamName}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3>Select Match</h3>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{monitor.matchSelectorName}}
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a ng-click="matchSelect(match,$parent.$index)" ng-repeat="match in matches" class="dropdown-item" href="">{{match.name}}    ::    {{match.team1}}   vs   {{match.team2}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <h3>Select Group</h3>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle selectedGroup" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            {{monitor.groupName}}
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a ng-click="groupSelect(group,$parent.$index)" ng-repeat="group in groupAvailable" class="dropdown-item" href="">{{group}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<button type="button" class="col-xs-6 text-right  btn btn-primary">Add</button>-->
+                        </div>
+
+                        <br/>
+                        <br/>
+                        <br/>
+                        <br/>
+
+                        <ul ng-click="execStack(monitor.name, monitor)" class="list-group">
+                            <li id="startScreen" ng-init="hover1 = false" ng-class="{active : hover1 ,}" ng-mouseenter="hover1 = true" ng-mouseleave="hover1 = false" ng-click="clickOn('Start Screen',monitor)" class="list-group-item monitorStateSelector">
+                                Start Screen
+                            </li>
+                            <li id="scoreboard" ng-init="hover2 = false" ng-class="{active : hover2}" ng-mouseenter="hover2 = true" ng-mouseleave="hover2 = false" ng-click="clickOn('Scoreboard',monitor)" class="list-group-item monitorStateSelector">
+                                Scoreboard
+                            </li>
+                            <li id="nextMatch" ng-init="hover3 = false" ng-class="{active : hover3}" ng-mouseenter="hover3 = true" ng-mouseleave="hover3 = false" ng-click="clickOn('Next Match',monitor)" class="list-group-item monitorStateSelector">
+                                Next Match
+                            </li>
+                            <li id="team2Lineup" ng-init="hover4 = false" ng-class="{active : hover4}" ng-mouseenter="hover4 = true" ng-mouseleave="hover4 = false" ng-click="clickOn('2 Team Lineup',monitor)" class="list-group-item monitorStateSelector">
+                                2 Team Lineup
+                            </li>
+                            <li id="formation" ng-init="hover5 = false" ng-class="{active : hover5}" ng-mouseenter="hover5 = true" ng-mouseleave="hover5 = false" ng-click="clickOn('Team Formation',monitor)" class="list-group-item monitorStateSelector">
+                                Team Formation
+                            </li>
+                            <li id="matchFixtures" ng-init="hover6 = false" ng-class="{active : hover6}" ng-mouseenter="hover6 = true" ng-mouseleave="hover6 = false" ng-click="clickOn('Match Fixtures',monitor)" class="list-group-item monitorStateSelector">
+                                Match Fixtures
+                            </li>
+                            <li id="groupInfo" ng-init="hover7 = false" ng-class="{active : hover7}" ng-mouseenter="hover7 = true" ng-mouseleave="hover7 = false" ng-click="clickOn('Group Information',monitor)" class="list-group-item monitorStateSelector">
+                                Group Information
+                            </li>
+                            <li id="playVideo" ng-init="hover8 = false" ng-class="{active : hover8}" ng-mouseenter="hover8 = true" ng-mouseleave="hover8 = false" ng-click="clickOn('Play Video',monitor)" class="list-group-item monitorStateSelector">
+                                Play Video
+                            </li>
                         </ul>
+                        <br/>
+                        <br/>
+
+                        <div ng-repeat="stack in stack[monitor.name]" class="container-fluid">
+                            <div class="alert alert-dark" role="alert">
+                                <div ng-click="removeDiv(monitor.name, $index)" class="removeDiv monitorStateSelector">
+                                    {{stack.close}}
+                                </div>
+                                <br/>
+                                <div class="stackDiv">
+                                    State : <b>{{stack.state}}</b> &emsp;&emsp; Duration: <b>{{stack.duration}}</b> &emsp;&emsp;
+                                    Team: <b>{{stack.team.teamName}}</b> &emsp;&emsp; Match: <b>{{stack.match.name}} :: {{stack.match.team1}} vs {{stack.match.team2}}</b>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
                     </div>
                 </div>
             </div>
         </div>
+
+
 
     </div>
 
@@ -87,20 +285,430 @@
 
     <!--  EDIT TEAMS  -->
     <div id="ET" class="container-fluid" ng-controller="EditTeam">
-        {{hello}}
+
+        <div id="ediTeamNav">
+            <nav class="navbar navbar-light bg-light">
+                <div class="btnBackET btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-secondary">Back</button>
+                </div>
+            </nav>
+        </div>
+
+        <br/>
+
+        <!-- ADD Team Jumbo -->
+        <div class="addTeamsJumbo container-fluid">
+            <div class="jumbotron col-md-12">
+                <h1 class="display-3">Add Team</h1>
+                <p class="lead">Add team to the database service</p>
+                <hr class="my-4">
+                <p>Add new teams to the database with correct information</p>
+                <p class="lead">
+                    <a class="btn btn-primary btn-lg btnAddT" href="#" role="button">Add Team</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Edit Team Jumbo -->
+        <div class="editTeamsJumbo container-fluid">
+                <div class="jumbotron col-md-12">
+                    <h1 class="display-3">Edit Team</h1>
+                    <p class="lead">Edit teams which are already available in DB Service</p>
+                    <hr class="my-4">
+                    <p>Edit the database with correct information</p>
+                    <p class="lead">
+                        <a class="btn btn-success btn-lg btnEditT" href="#" role="button">Edit Team</a>
+                    </p>
+                </div>
+            </div>
+
+        <!-- Add Team Form -->
+        <div id="AddT" class="container-fluid">
+            <div class="addTeamForm">
+
+            </div>
+            <div class="editTeamForm">
+                <h1 class="text-center">Add a new Team</h1>
+                <form>
+                    <div class="form-group">
+                        <label>Team name</label>
+                        <input class="form-control" id="teamName" placeholder="Enter Team Name">
+                        <small class="form-text text-muted">Add the team name here.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Faculty</label>
+                        <input class="form-control" id="teamFaculty" placeholder="Faculty">
+                        <small class="form-text text-muted">Enter the faculty of the team ex E-Fac, Sci-Fac</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Group</label>
+                        <input class="form-control" id="teamGroup" placeholder="Group">
+                        <small class="form-text text-muted">Enter the group of the team ex - A,B,C</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Batch</label>
+                        <input class="form-control" id="teamBatch" placeholder="Batch">
+                        <small class="form-text text-muted">Enter the batch of the team ex - 2015</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Players</label>
+                        <input class="form-control" id="teamPlayer1" placeholder="Player 1">
+                        <br/>
+                        <input class="form-control" id="teamPlayer2" placeholder="Player 2">
+                        <br/>
+                        <input class="form-control" id="teamPlayer3" placeholder="Player 3">
+                        <br/>
+                        <input class="form-control" id="teamPlayer4" placeholder="Player 4">
+                        <br/>
+                        <input class="form-control" id="teamPlayer5" placeholder="Player 5">
+                        <br/>
+                        <input class="form-control" id="teamPlayer6" placeholder="Player 6">
+                        <br/>
+                        <input class="form-control" id="teamPlayer7" placeholder="Player 7">
+                        <br/>
+                        <br/>
+                        <input class="form-control" id="teamPlayer8" placeholder="Player Substitute">
+                        <small class="form-text text-muted">Enter the players of the team</small>
+                    </div>
+                    <br/>
+                    <label class="form-check-label">
+                        <input id="isFemale" type="checkbox" class="form-check-input">
+                        Female
+                    </label>
+                    <br/>
+                    <br/>
+
+                    <button type="submit" class="btn btn-primary btnSubmitAddTeam">Submit</button>
+                </form>
+            </div>
+            <hr/>
+            <div id="doneSavingNewAlert">
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">New Team Added</h4>
+                    <p>Aww yeah, you successfully added a new team to the database</p>
+                    <hr>
+                    <p class="mb-0">In order to edit team data use Edit data option</p>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Edit Team Form -->
+        <div id="EditT" class="container-fluid" ng-controller="EditTeam">
+            <div ng-click="update()" class="clickEditTeam"></div>
+            <div id="selectTeamEdit">
+                <div class="dropdown">
+                    <button class="btn btn-primary btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Teams List
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a ng-repeat="team in teams" class="dropdown-item" ng-click="selectTeam(team); update()" href="#">{{team.teamName}}</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editTeamForm">
+                <h1 class="text-center">Edit Team</h1>
+                <form>
+                    <div class="form-group">
+                        <label>Team name</label>
+                        <input ng-model="teamSelected.teamName" id="eteamName"  class="form-control" placeholder="Enter Team Name" disabled>
+                        <small class="form-text text-muted">Add the team name here.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Faculty</label>
+                        <input ng-model="teamSelected.faculty" class="form-control" id="eteamFaculty" placeholder="Faculty">
+                        <small class="form-text text-muted">Enter the faculty of the team ex E-Fac, Sci-Fac</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Group</label>
+                        <input ng-model="teamSelected.group" class="form-control" id="eteamGroup" placeholder="Group">
+                        <small class="form-text text-muted">Enter the group of the team ex - A,B,C</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Batch</label>
+                        <input ng-model="teamSelected.batch" class="form-control" id="eteamBatch" placeholder="Batch">
+                        <small class="form-text text-muted">Enter the batch of the team ex - 2015</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Players</label>
+                        <input ng-model="teamSelected.players[0].name" class="form-control" id="eteamPlayer1" placeholder="Player 1">
+                        <br/>
+                        <input ng-model="teamSelected.players[1].name" class="form-control" id="eteamPlayer2" placeholder="Player 2">
+                        <br/>
+                        <input ng-model="teamSelected.players[2].name" class="form-control" id="eteamPlayer3" placeholder="Player 3">
+                        <br/>
+                        <input ng-model="teamSelected.players[3].name" class="form-control" id="eteamPlayer4" placeholder="Player 4">
+                        <br/>
+                        <input ng-model="teamSelected.players[4].name" class="form-control" id="eteamPlayer5" placeholder="Player 5">
+                        <br/>
+                        <input ng-model="teamSelected.players[5].name" class="form-control" id="eteamPlayer6" placeholder="Player 6">
+                        <br/>
+                        <input ng-model="teamSelected.players[6].name" class="form-control" id="eteamPlayer7" placeholder="Player 7">
+                        <br/>
+                        <br/>
+                        <input ng-model="teamSelected.players[7].name" class="form-control" id="eteamPlayer8" placeholder="Player Substitute">
+                        <small class="form-text text-muted">Enter the players of the team</small>
+                    </div>
+                    <br/>
+                    <label id="eisFemale" ng-model="teamSelected.isFemale" class="form-check-label">
+                        <input type="checkbox" class="form-check-input">
+                        Female
+                    </label>
+                    <br/>
+                    <br/>
+
+                    <button id="editTeamSubmitBtn" type="submit" class="btn btn-primary">Submit</button>
+                    <button id="editTeamDeleteBtn" type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+            <hr/>
+            <div id="edoneSavingEditAlert">
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">New Team Added</h4>
+                    <p>Aww yeah, you successfully added a new team to the database</p>
+                    <hr>
+                    <p class="mb-0">In order to edit team data use Edit data option</p>
+                </div>
+            </div>
+        </div>
     </div>
 
 
     <!--  EDIT MATCHES  -->
     <div id="EM" class="container-fluid" ng-controller="EditMatches">
-        {{hello}}
-    </div>
+        <div class="editMatchesClick" ng-click="update()"></div>
 
+        <div id="ediMatchNav">
+            <nav class="navbar navbar-light bg-light">
+                <div class="btnBackET btn-group" role="group" aria-label="Basic example">
+                    <button type="button" class="btn btn-secondary">Back</button>
+                </div>
+            </nav>
+        </div>
+
+        <!-- ADD Matches Jumbo -->
+        <div class="addMatchesJumbo container-fluid">
+            <div class="jumbotron col-md-12">
+                <h1 class="display-3">Add Match</h1>
+                <p class="lead">Add matches to the database service</p>
+                <hr class="my-4">
+                <p>Add new matches to the database with correct information</p>
+                <p class="lead">
+                    <a class="btn btn-warning btn-lg btnAddM" href="#" role="button">Add Match</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Edit Team Jumbo -->
+        <div class="editMatchesJumbo container-fluid">
+            <div class="jumbotron col-md-12">
+                <h1 class="display-3">Edit Match</h1>
+                <p class="lead">Edit matches which are already available in DB Service</p>
+                <hr class="my-4">
+                <p>Edit the database with correct information</p>
+                <p class="lead">
+                    <a class="btn btn-danger btn-lg btnEditM" href="#" role="button">Edit Match</a>
+                </p>
+            </div>
+        </div>
+
+        <!-- Match List  -->
+        <div id="matchList">
+            <h1>Match List</h1>
+
+            <div class="list-group">
+                <a ng-repeat="match in matches" ng-click="selectTeam(match)" href="" class="list-group-item">{{match.name}} :: {{match.team1}} vs {{match.team2}}</a>
+            </div>
+        </div>
+
+        <div id = "addMatch">
+            <h1>Add Match</h1>
+
+            <form>
+                <div class="form-group">
+                    <label>Match Index</label>
+                    <input class="form-control matchIndex" placeholder="Index">
+                    <small class="form-text text-muted">Index i.e : 1,2,3</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Match Name</label>
+                    <input class="form-control matchName" placeholder="Match">
+                    <small class="form-text text-muted">Match Name i.e : Semifinal 01, Match 01</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Match Type</label>
+                    <div class="dropdown">
+                        <button class="matchTypeSel btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Match Type
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item matchTypeSelA" href="">Group</a>
+                            <a class="dropdown-item matchTypeSelA" href="">Quarter Final</a>
+                            <a class="dropdown-item matchTypeSelA" href="">Semi Final</a>
+                            <a class="dropdown-item matchTypeSelA" href="">Final</a>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="container">
+                    <div class="row text-center">
+                        <button class="btn btn-secondary dropdown-toggle team1listDropBtn" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Team 01
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a ng-repeat="team in teams" class="dropdown-item team1listDropBtnA" ng-click="changeLabel('.team1listDropBtn',team.teamName)" href="">{{team.teamName}}</a>
+                        </div>
+
+
+                        <h1>&nbsp; vs &nbsp;</h1>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle team2listDropBtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Team 02
+                            </button>
+                            <div class="dropdown-menu">
+                                <a ng-repeat="team in teams" class="dropdown-item team2listDropBtnA" ng-click="changeLabel('.team2listDropBtn',team.teamName)" href="">{{team.teamName}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="form-group">
+                            <label>Team 01</label>
+                            <input class="form-control pointsTeam1" placeholder="Points">
+                            <small class="form-text text-muted">Team 01 points</small>
+                        </div>
+
+                        <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+
+                        <div class="form-group">
+                            <label>Team 02</label>
+                            <input class="form-control pointsTeam2" placeholder="Points">
+                            <small class="form-text text-muted">Team 02 points</small>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-control form-check-input isPlayed" type="checkbox">
+                        Is game played?
+                    </label>
+                </div>
+                <br/>
+
+                <button type="submit" class="btn btn-primary submitNewMatch">Submit</button>
+            </form>
+            <br/>
+            <br/>
+        </div>
+
+        <div id = "editMatch">
+            <h1>Edit Match</h1>
+
+            <form>
+                <div class="form-group">
+                    <label>Match Index</label>
+                    <input class="form-control matchIndexE" placeholder="Index" disabled>
+                    <small class="form-text text-muted">Index i.e : 1,2,3</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Match Name</label>
+                    <input class="form-control matchNameE" placeholder="Match">
+                    <small class="form-text text-muted">Match Name i.e : Semifinal 01, Match 01</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Match Type</label>
+                    <div class="dropdown">
+                        <button class="matchTypeSelE btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Match Type
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item matchTypeSelAE" href="">Group</a>
+                            <a class="dropdown-item matchTypeSelAE" href="">Quarter Final</a>
+                            <a class="dropdown-item matchTypeSelAE" href="">Semi Final</a>
+                            <a class="dropdown-item matchTypeSelAE" href="">Final</a>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="container">
+                    <div class="row text-center">
+                        <button class="btn btn-secondary dropdown-toggle team1listDropBtnE" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Team 01
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a ng-repeat="team in teams" class="dropdown-item team1listDropBtnA" ng-click="changeLabel('.team1listDropBtnE',team.teamName)" href="">{{team.teamName}}</a>
+                        </div>
+
+
+                        <h1>&nbsp; vs &nbsp;</h1>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle team2listDropBtnE" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Team 02
+                            </button>
+                            <div class="dropdown-menu">
+                                <a ng-repeat="team in teams" class="dropdown-item team2listDropBtnAE" ng-click="changeLabel('.team2listDropBtnE',team.teamName)" href="">{{team.teamName}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row text-center">
+                        <div class="form-group">
+                            <label>Team 01</label>
+                            <input class="form-control pointsTeam1E" placeholder="Points">
+                            <small class="form-text text-muted">Team 01 points</small>
+                        </div>
+
+                        <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+
+                        <div class="form-group">
+                            <label>Team 02</label>
+                            <input class="form-control pointsTeam2E" placeholder="Points">
+                            <small class="form-text text-muted">Team 02 points</small>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input class="form-control form-check-input isPlayedE" type="checkbox">
+                        Is game played?
+                    </label>
+                </div>
+                <br/>
+
+                <div class="alert alert-success successEditAlert" role="alert">
+                    Edit match successful!!!
+                </div>
+
+                <!--<button type="submit" class="btn btn-warning submitEditMatchE">Submit</button>-->
+                <button type="submit" class="btn btn-danger deleteEditMatchE">Delete</button>
+            </form>
+            <br/>
+            <br/>
+        </div>
+
+        <div class="alert alert-danger errorEditMatch" role="alert">
+            Oooooops error !!!!!
+        </div>
+
+    </div>
 
     <script src="resources/require/bootstrap/js/jquery-3.1.0.min.js"></script>
     <script src="resources/require/bootstrap/js/jquery-ui.min.js"></script>
     <script src="resources/require/bootstrap/js/popper.js"></script>
-    <script src="resources/require/bootstrap/js/bootstrap.min.js"></script>
+    <script src="resources/require/bootstrap/js/bootstrap.js"></script>
     <script src="resources/app.js"></script>
 </body>
 </html>

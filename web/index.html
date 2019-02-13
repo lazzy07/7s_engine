@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="IdeApp">
 <head>
     <meta charset="UTF-8">
     <title>Created by LMS</title>
@@ -8,10 +8,22 @@
     <link rel="stylesheet" type="text/css" href="./resources/require/fonts/fonts.css" />
 </head>
 
-<body>
+<body ng-controller="ScreenController">
+    <div ng-click="update()" class="clickMe"></div>
+
+
+    <!--  Play video playing Logo  -->
+    <div id="tvLogo">
+        <div class="logoOuter">
+            <img id="logoOuter" src="./obj/logo_outer.png">
+            <h2 class="logoTopic" id="logoTopic1">PERA SCIENCE '15</h2>
+            <h2 class="logoTopic" id="logoTopic2">TAGBY 7S</h2>
+        </div>
+    </div>
+
 
     <div id="videoPlayer">
-        <video id="videoClass" width="1366" autoplay>
+        <video id="videoClass" autoplay>
             <source id="videoPlay" src="" type="video/mp4">
         </video>
     </div>
@@ -57,27 +69,18 @@
 
     <!-- TV SCREEN FOR NOW PLAYING / NEXT -->
     <div id="nowPlaying">
-        <div id="tvLogo">
-            <div class="logoOuter">
-                <img id="logoOuter" src="./obj/logo_outer.png">
-                <h2 class="logoTopic" id="logoTopic1">PERA SCIENCE '15</h2>
-                <h2 class="logoTopic" id="logoTopic2">TAGBY 7S</h2>
-            </div>
-        </div>
-
-
         <div id="sideScreen">
             <div id="sideScreen1"></div>
             <div id="sideScreen2"></div>
         </div>
 
-        <div class="defFont" id="nowplTag">Match 1</div>
+        <div class="defFont" id="nowplTag">{{data.match.name}}</div>
         <div class="defFont" id="nowpldownTag">tagby '7s</div>
 
         <div id="nowTeams">
             <span class="defFont nowTeamsClass" id="antiR">Antiraggers '17</span>
-            <span class="defFont nowTeamsClass" id="team1Div">TEAM ALPHA</span>
-            <span class="defFont nowTeamsClass" id="team2Div">TEAM BETA</span>
+            <span class="defFont nowTeamsClass" id="team1Div">{{data.match.team1}}</span>
+            <span class="defFont nowTeamsClass" id="team2Div">{{data.match.team2}}</span>
             <span class="defFont nowTeamsClass" id="hashTag">#tagby17</span>
         </div>
 
@@ -91,7 +94,7 @@
 
     <!-- 2 Team Lineup -->
     <div id="teamf2Sheet">
-        <div class="defFont" id="team2Topic">Match 01</div>
+        <div class="defFont" id="team2Topic">{{data.match.name}}</div>
         <div class="defFont" id="team2subTopic">TAGBY 7's</div>
 
 
@@ -107,82 +110,74 @@
         </div>
 
         <div class="teamSheet defFont" id="team1Sheet">
-            <h1 class="tName" id="tName1">TEAM ALPHA</h1>
-            <h1 class="entry" id="t1e1">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e2">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e3">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e4">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e5">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e6">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e7">Lasantha Madushan</h1>
+            <h1 class="tName" id="tName1">{{team1.teamName}}</h1>
+            <h1 class="entry" id="t1e1">{{team1.players[0].name}}</h1>
+            <h1 class="entry" id="t1e2">{{team1.players[1].name}}</h1>
+            <h1 class="entry" id="t1e3">{{team1.players[2].name}}</h1>
+            <h1 class="entry" id="t1e4">{{team1.players[3].name}}</h1>
+            <h1 class="entry" id="t1e5">{{team1.players[4].name}}</h1>
+            <h1 class="entry" id="t1e6">{{team1.players[5].name}}</h1>
+            <h1 class="entry" id="t1e7">{{team1.players[6].name}}</h1>
         </div>
 
         <div class="teamSheet defFont" id="team1SheetS">
-            <h1 class="tName" id="tName1S">TEAM ALPHA</h1>
+            <h1 class="tName" id="tName1S">{{team1.teamName}}</h1>
             <h1 class="entry" id="t1e1S">Substitutes</h1>
-            <h1 class="entry" id="t1e2S">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e3S">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e4S">Lasantha Madushan</h1>
+            <h1 class="entry" id="t1e2S">{{team1.players[7].name}}</h1>
         </div>
 
         <div class="defFont" id="numberClass1">
-            <h1 class="tNo" id="tNo1">TEAM ALPHA</h1>
-            <h1 class="noE" id="t1n1">07</h1>
-            <h1 class="noE" id="t1n2">07</h1>
-            <h1 class="noE" id="t1n3">07</h1>
-            <h1 class="noE" id="t1n4">07</h1>
-            <h1 class="noE" id="t1n5">07</h1>
-            <h1 class="noE" id="t1n6">07</h1>
+            <h1 class="tNo" id="tNo1">{{team1.teamName}}</h1>
+            <h1 class="noE" id="t1n1">01</h1>
+            <h1 class="noE" id="t1n2">02</h1>
+            <h1 class="noE" id="t1n3">03</h1>
+            <h1 class="noE" id="t1n4">04</h1>
+            <h1 class="noE" id="t1n5">05</h1>
+            <h1 class="noE" id="t1n6">06</h1>
             <h1 class="noE" id="t1n7">07</h1>
         </div>
 
         <div class="defFont" id="numberClass1S">
-            <h1 class="tNo" id="tNo1S">TEAM ALPHA</h1>
+            <h1 class="tNo" id="tNo1S">{{team1.teamName}}</h1>
             <h1 class="noE" id="t1n1S">00</h1>
             <h1 class="noE" id="t1n2S">07</h1>
-            <h1 class="noE" id="t1n3S">07</h1>
-            <h1 class="noE" id="t1n4S">07</h1>
         </div>
 
         <div id="middleLogo"></div>
         <img id="middleLogoImg" src="./obj/logo_middle_magenta.png">
 
         <div class="teamSheet defFont" id="team2Sheet">
-            <h1 class="tName" id="tName2">TEAM BETA</h1>
-            <h1 class="entry" id="t2e1">Lasantha Madushan</h1>
-            <h1 class="entry" id="t2e2">Lasantha Madushan</h1>
-            <h1 class="entry" id="t2e3">Lasantha Madushan</h1>
-            <h1 class="entry" id="t2e4">Lasantha Madushan</h1>
-            <h1 class="entry" id="t2e5">Lasantha Madushan</h1>
-            <h1 class="entry" id="t2e6">Lasantha Madushan</h1>
-            <h1 class="entry" id="t2e7">Lasantha Madushan</h1>
+            <h1 class="tName" id="tName2">{{team2.teamName}}</h1>
+            <h1 class="entry" id="t2e1">{{team2.players[0].name}}</h1>
+            <h1 class="entry" id="t2e2">{{team2.players[1].name}}</h1>
+            <h1 class="entry" id="t2e3">{{team2.players[2].name}}</h1>
+            <h1 class="entry" id="t2e4">{{team2.players[3].name}}</h1>
+            <h1 class="entry" id="t2e5">{{team2.players[4].name}}</h1>
+            <h1 class="entry" id="t2e6">{{team2.players[5].name}}</h1>
+            <h1 class="entry" id="t2e7">{{team2.players[6].name}}</h1>
         </div>
 
         <div class="teamSheet defFont" id="team2SheetS">
-            <h1 class="tName" id="tName2S">TEAM BETA</h1>
+            <h1 class="tName" id="tName2S">{{team2.teamName}}</h1>
             <h1 class="entry" id="t2e1S">Substitutes</h1>
-            <h1 class="entry" id="t2e2S">Lasantha Madushan</h1>
-            <h1 class="entry" id="t2e3S">Lasantha Madushan</h1>
-            <h1 class="entry" id="t2e4S">Lasantha Madushan</h1>
+            <h1 class="entry" id="t2e2S">{{team2.players[7].name}}</h1>
         </div>
 
         <div class="defFont" id="numberClass2">
-            <h1 class="tNo" id="tNo2">TEAM ALPHA</h1>
-            <h1 class="noE" id="t2n1">07</h1>
-            <h1 class="noE" id="t2n2">07</h1>
-            <h1 class="noE" id="t2n3">07</h1>
-            <h1 class="noE" id="t2n4">07</h1>
-            <h1 class="noE" id="t2n5">07</h1>
-            <h1 class="noE" id="t2n6">07</h1>
+            <h1 class="tNo" id="tNo2">{{team2.teamName}}</h1>
+            <h1 class="noE" id="t2n1">01</h1>
+            <h1 class="noE" id="t2n2">02</h1>
+            <h1 class="noE" id="t2n3">03</h1>
+            <h1 class="noE" id="t2n4">04</h1>
+            <h1 class="noE" id="t2n5">05</h1>
+            <h1 class="noE" id="t2n6">06</h1>
             <h1 class="noE" id="t2n7">07</h1>
         </div>
 
         <div class="defFont" id="numberClass2S">
-            <h1 class="tNo" id="tNo2S">TEAM ALPHA</h1>
+            <h1 class="tNo" id="tNo2S">{{team2.teamName}}</h1>
             <h1 class="noE" id="t2n1S">00</h1>
-            <h1 class="noE" id="t2n2S">07</h1>
-            <h1 class="noE" id="t2n3S">07</h1>
-            <h1 class="noE" id="t2n4S">07</h1>
+            <h1 class="noE" id="t2n2S">08</h1>
         </div>
     </div>
 
@@ -198,41 +193,37 @@
         </div>
 
         <div class="teamSheet defFont" id="team1SheetL">
-            <h1 class="tName" id="tName1L">TEAM ALPHA</h1>
-            <h1 class="entry" id="t1e1L">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e2L">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e3L">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e4L">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e5L">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e6L">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e7L">Lasantha Madushan</h1>
+            <h1 class="tName" id="tName1L">{{data.team.teamName}}</h1>
+            <h1 class="entry" id="t1e1L">{{data.team.players[0].name}}</h1>
+            <h1 class="entry" id="t1e2L">{{data.team.players[1].name}}</h1>
+            <h1 class="entry" id="t1e3L">{{data.team.players[2].name}}</h1>
+            <h1 class="entry" id="t1e4L">{{data.team.players[3].name}}</h1>
+            <h1 class="entry" id="t1e5L">{{data.team.players[4].name}}</h1>
+            <h1 class="entry" id="t1e6L">{{data.team.players[5].name}}</h1>
+            <h1 class="entry" id="t1e7L">{{data.team.players[6].name}}</h1>
         </div>
 
         <div class="teamSheet defFont" id="team1SheetLS">
-            <h1 class="tName" id="tName1LS">TEAM ALPHA</h1>
+            <h1 class="tName" id="tName1LS">{{data.team.teamName}}</h1>
             <h1 class="entry" id="t1e1LS">Substitutes</h1>
-            <h1 class="entry" id="t1e2LS">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e3LS">Lasantha Madushan</h1>
-            <h1 class="entry" id="t1e4LS">Lasantha Madushan</h1>
+            <h1 class="entry" id="t1e2LS">{{data.team.players[6].name}}</h1>
         </div>
 
         <div class="defFont" id="numberClass1L">
-            <h1 class="tNo" id="tNo1L">TEAM ALPHA</h1>
-            <h1 class="noE" id="t1n1L">07</h1>
-            <h1 class="noE" id="t1n2L">07</h1>
-            <h1 class="noE" id="t1n3L">07</h1>
-            <h1 class="noE" id="t1n4L">07</h1>
-            <h1 class="noE" id="t1n5L">07</h1>
-            <h1 class="noE" id="t1n6L">07</h1>
-            <h1 class="noE" id="t1n7L">07</h1>
+            <h1 class="tNo" id="tNo1L">{{data.team.teamName}}</h1>
+            <h1 class="noE" id="t1n1L">1</h1>
+            <h1 class="noE" id="t1n2L">2</h1>
+            <h1 class="noE" id="t1n3L">3</h1>
+            <h1 class="noE" id="t1n4L">4</h1>
+            <h1 class="noE" id="t1n5L">5</h1>
+            <h1 class="noE" id="t1n6L">6</h1>
+            <h1 class="noE" id="t1n7L">7</h1>
         </div>
 
         <div class="defFont" id="numberClass1LS">
-            <h1 class="tNo" id="tNo1LS">TEAM ALPHA</h1>
+            <h1 class="tNo" id="tNo1LS">{{data.team.teamName}}</h1>
             <h1 class="noE" id="t1n1LS">00</h1>
-            <h1 class="noE" id="t1n2LS">07</h1>
-            <h1 class="noE" id="t1n3LS">07</h1>
-            <h1 class="noE" id="t1n4LS">07</h1>
+            <h1 class="noE" id="t1n2LS">8</h1>
         </div>
 
         <div id="formationDiv"></div>
@@ -241,13 +232,13 @@
 
         <div class="defFont" id="numberClass1LF">
             <h1 class="tNo" id="tNo1LF">00</h1>
-            <h1 class="noEF" id="t1n1LF">07</h1>
-            <h1 class="noEF" id="t1n2LF">07</h1>
-            <h1 class="noEF" id="t1n3LF">07</h1>
-            <h1 class="noEF" id="t1n4LF">07</h1>
-            <h1 class="noEF" id="t1n5LF">07</h1>
-            <h1 class="noEF" id="t1n6LF">07</h1>
-            <h1 class="noEF" id="t1n7LF">07</h1>
+            <h1 class="noEF" id="t1n1LF">1</h1>
+            <h1 class="noEF" id="t1n2LF">2</h1>
+            <h1 class="noEF" id="t1n3LF">3</h1>
+            <h1 class="noEF" id="t1n4LF">4</h1>
+            <h1 class="noEF" id="t1n5LF">5</h1>
+            <h1 class="noEF" id="t1n6LF">6</h1>
+            <h1 class="noEF" id="t1n7LF">7</h1>
         </div>
     </div>
 
@@ -267,14 +258,14 @@
 
 
         <img id="scrLogo" src="./obj/logo_middle_magenta.png">
-        <div class="defFont scrName" id="scrTeam1">TEAM ALPHA</div>
-        <div class="defFont scrName" id="scrTeam2">TEAM BETA</div>
+        <div class="defFont scrName" id="scrTeam1">TEAM 01</div>
+        <div class="defFont scrName" id="scrTeam2">TEAM 02</div>
         <div class="defFont scrScore" id="scrScore1">0</div>
         <div class="defFont scrScore" id="scrScore2">0</div>
 
-        <div class="defFont" id="scrClock"><b>12:12</b></div>
+        <div class="defFont" id="scrClock"><b>00:00</b></div>
         <div class="defFont" id="scrState"><b>Interval</b></div>
-        <div class="defFont" id="scrMatch">Match 01</div>
+        <div class="defFont" id="scrMatch">Match</div>
     </div>
 
 
@@ -296,80 +287,12 @@
             <div id="tableData">
                 <div class="defFont tableCaption">Match Fixtures</div>
 
-                <div class = "horizontal">
-                    <div class="td">Team1</div>
-                    <div class="td point">01</div>
-                    <div class="td point">02</div>
-                    <div class="td" >Team2</div>
+                <div ng-repeat="fixture in fixtures" class = "horizontal">
+                    <div class="td">{{fixture.team1}}</div>
+                    <div class="td point">{{fixture.point1}}</div>
+                    <div class="td point">{{fixture.point2}}</div>
+                    <div class="td" >{{fixture.team2}}</div>
                 </div>
-                <div class = "horizontal">
-                    <div class="td">Team1</div>
-                    <div class="td point">01</div>
-                    <div class="td point">02</div>
-                    <div class="td" >Team2</div>
-                </div>
-                <div class = "horizontal">
-                    <div class="td">Team1</div>
-                    <div class="td point">01</div>
-                    <div class="td point">02</div>
-                    <div class="td" >Team2</div>
-                </div>
-                <div class = "horizontal">
-                    <div class="td">Team1</div>
-                    <div class="td point">01</div>
-                    <div class="td point">02</div>
-                    <div class="td" >Team2</div>
-                </div>
-                <div class = "horizontal">
-                    <div class="td">Team1</div>
-                    <div class="td point">01</div>
-                    <div class="td point">02</div>
-                    <div class="td" >Team2</div>
-                </div>
-                <div class = "horizontal">
-                    <div class="td">Team1</div>
-                    <div class="td point">01</div>
-                    <div class="td point">02</div>
-                    <div class="td" >Team2</div>
-                </div>
-                <div class = "horizontal">
-                    <div class="td">Team1</div>
-                    <div class="td point">01</div>
-                    <div class="td point">02</div>
-                    <div class="td" >Team2</div>
-                </div>
-                <div class = "horizontal">
-                    <div class="td">Team1</div>
-                    <div class="td point">01</div>
-                    <div class="td point">02</div>
-                    <div class="td" >Team2</div>
-                </div>
-                <div class = "horizontal">
-                    <div class="td">Team1</div>
-                    <div class="td point">01</div>
-                    <div class="td point">02</div>
-                    <div class="td" >Team2</div>
-                </div>
-                <div class = "horizontal">
-                    <div class="td">Team1</div>
-                    <div class="td point">01</div>
-                    <div class="td point">02</div>
-                    <div class="td" >Team2</div>
-                </div>
-                <div class = "horizontal">
-                    <div class="td">Team1</div>
-                    <div class="td point">01</div>
-                    <div class="td point">02</div>
-                    <div class="td" >Team2</div>
-                </div>
-                <div class = "horizontal">
-                    <div class="td">Team1</div>
-                    <div class="td point">01</div>
-                    <div class="td point">02</div>
-                    <div class="td" >Team2</div>
-                </div>
-
-
             </div>
         </div>
     </div>
@@ -385,6 +308,52 @@
         <div class="defFont closeScrDiv" id="closeScrDiv2">2K17</div>
     </div>
 
+    <!-- Group Info -->
+    <div id = "groupInfo">
+        <div id="sideScreen1G"></div>
+        <div id="sideScreen2G"></div>
+        <div id="magentaLogoG">
+            <img id="magentaImgG" src="./obj/logo_middle_magenta.png">
+            <h1 class="defFont2" id="magenta2G">TAGBY 7s</h1>
+            <h1 class="defFont2" id="magenta2HG">2K17</h1>
+        </div>
+
+        <div class="topicG defFont2">
+            <div class="topicTG">Tagby 7's</div>
+            <div class="topicSG">Group Stage</div>
+        </div>
+
+        <div id="groupTable">
+            <div class="defFont2 tableCaption">Group {{data.group[0].group}}</div>
+            <div id="groupTableDiv">
+                <table class="defFont2 margin" cellspacing="0" cellpadding="10px">
+                    <tr>
+                        <th class="topic2 teamName">Team</th>
+                        <th class="topic1">Played</th>
+                        <th class="topic1">Won</th>
+                        <th class="topic1">Draw</th>
+                        <th class="topic1">Lost</th>
+                        <th class="topic1">TC</th>
+                        <th class="topic1">TA</th>
+                        <th class="topic1">TD</th>
+                        <th class="topic1">Points</th>
+                    </tr>
+                    <tr ng-repeat="team in data.group">
+                        <th class="point1 teamName">{{team.teamName}}</th>
+                        <th class="point1">{{team.played}}</th>
+                        <th class="point1">{{team.won}}</th>
+                        <th class="point1">{{team.draw}}</th>
+                        <th class="point1">{{team.lost}}</th>
+                        <th class="point1">{{team.totalTries}}</th>
+                        <th class="point1">{{team.triesAgainst}}</th>
+                        <th class="point1">{{team.totalTries - team.triesAgainst}}</th>
+                        <th class="point1">{{team.points}}</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
 
     <script src="resources/require/bootstrap/js/jquery-3.1.0.min.js"></script>
     <script src="resources/require/bootstrap/js/jquery-ui.min.js"></script>
@@ -392,6 +361,10 @@
     <script src="resources/require/bootstrap/js/angular.min.js"></script>
     <script src="resources/require/bootstrap/js/angular-route.min.js"></script>
     <script src="resources/require/bootstrap/js/socket.io.js"></script>
+    <script src="resources/require/bootstrap/js/screenfull.min.js"></script>
+    <script src="resources/require/bootstrap/js/popper.js"></script>
+    <script src="resources/require/bootstrap/js/bootstrap.js"></script>
+
     <script src="resources/start.js"></script>
 </body>
 </html>

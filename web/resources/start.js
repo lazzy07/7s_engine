@@ -8,11 +8,70 @@ var sysState = "none";
 var sysUpdate = true;
 var tvLogo = false;
 
-var videoNo = 1;
-var maxVideo = 3;
+var app = angular.module("IdeApp",[]);
+
+var videoNo = 0;
+var maxVideo = 9;
 
 var state = "start";
 var name;
+
+var recivedData;
+
+var returnNow = false;
+
+var recivedTeam1;
+var recivedTeam2;
+var recivedFixtures;
+
+
+var timeCount;
+var timerMin, timerSec;
+
+var pathVid = "./resources/videos/00";
+
+var timeLine;
+
+var isReversed = false;
+
+function startTimer(duration, display) {
+    var start = Date.now(),
+        diff,
+        minutes,
+        seconds;
+
+    function timer() {
+        // get the number of seconds that have elapsed since
+        // startTimer() was called
+        diff = duration - (((Date.now() - start) / 1000) | 0);
+
+        // does the same job as parseInt truncates the float
+        minutes = (diff / 60) | 0;
+        seconds = (diff % 60) | 0;
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        timerMin = minutes;
+        timerSec = seconds;
+
+        if (diff <= 0) {
+            // add one second so that the count down starts at the full duration
+            // example 05:00 not 04:59
+            //start = Date.now() + 1000;
+            clearInterval(timeCount);
+        }
+    }
+
+    // we don't want to wait a full second before the timer starts
+    timer();
+
+    timeCount  = setInterval(timer, 1000);
+};
+
+
 
 //**********MO.JS****************
 //Circle burst
@@ -72,6 +131,28 @@ const circ3Close = new mojs.Shape({
 //Normal JS
 var vid = document.getElementById("videoClass");
 
+function interpret(rState){
+    var newState;
+
+    if(rState === "Start Screen"){
+        newState = "start";
+    }else if(rState === "Scoreboard"){
+        newState = "scoreboard";
+    }else if(rState === "Next Match"){
+        newState = "nextMatch";
+    }else if(rState === "2 Team Lineup"){
+        newState = "team2Formation";
+    }else if(rState === "Team Formation"){
+        newState = "teamFormation";
+    }else if(rState === "Match Fixtures"){
+        newState = "fixtures";
+    }else if(rState === "Group Information"){
+        newState = "gInfo";
+    }else if(rState === "Play Video")
+        newState = "playVideo";
+    return newState;
+}
+
 function playVid() {
     vid.play();
 }
@@ -87,7 +168,7 @@ function playVidFunc(){
 
         var video = document.getElementById('videoClass');
         var sources = video.getElementsByTagName('source');
-        sources[0].src = "./resources/videos/00" + videoNo.toString() + ".mp4";
+        sources[0].src = pathVid + videoNo.toString() + ".mp4";
         video.load();
 
         $("#videoClass").bind("ended", function() {
@@ -102,19 +183,38 @@ function playVidFunc(){
             video.load();
         });
         playVid();
-        if(tvLogo == true) {
-            const timeLine = new mojs.Timeline({
-                repeat: 999
-            })
-                .add(circ, circ2)
-                .play();
-        }
+
     } else {
         pauseVid();
     }
 }
 
+function showLogo() {
+    if(state === "playVideo") {
+        timeLine = new mojs.Timeline({
+            repeat: 6
+        })
+            .add(circ, circ2)
+            .play();
 
+        $("#tvLogo").css("visibility", "visible");
+        $("#tvLogo").fadeIn(800);
+
+    }else{
+
+        $("#tvLogo").fadeOut(800);
+
+        setTimeout(function () {
+            $("#tvLogo").css("visibility", "hidden");
+        },800);
+
+
+    }
+}
+
+
+
+//Sys update function
 function sysUpFunc() {
     if (sysUpdate == true) {
         $("#closeScr").css("visibility", "visible");
@@ -162,6 +262,7 @@ function sysUpFunc() {
     });
 }
 
+//Scoreboard
 function scoreboardFunc(){
     if(state == "scoreboard"){
 
@@ -217,6 +318,7 @@ function scoreboardFunc(){
     }
 }
 
+//TeamFormation
 function teamFormation(formationDuration,subDuration){
         $("#sideScreen3L").hide().show("slide", {direction: "left"}, 1000);
         $("#sideScreen4L").hide().show("slide", {direction: "right"}, 1000);
@@ -280,6 +382,8 @@ function teamFormation(formationDuration,subDuration){
 
                                     setTimeout(function(){
                                         $("#lineup1Team").css("visibility", "hidden");
+                                        state = "playVideo";
+                                        showLogo();
                                     },800)
                                 },800)
                             },800);
@@ -293,6 +397,7 @@ function teamFormation(formationDuration,subDuration){
         $("#lineup1Team").css("visibility", "visible");
 }
 
+//Team2formation
 function team2Formation(sub, formationDuration, subDuration){
     if(state == "team2Formation"){
         $("#magentaImg2").hide();
@@ -313,6 +418,8 @@ function team2Formation(sub, formationDuration, subDuration){
 
         $("#middleLogo").hide();
         $("#middleLogoImg").hide();
+
+        $("#teamf2Sheet").css("visibility", "visible");
 
 
 
@@ -371,6 +478,12 @@ function team2Formation(sub, formationDuration, subDuration){
                                             setTimeout(function(){
                                                 $("#sideScreen3").hide("slide", {direction: "left"}, 1000);
                                                 $("#sideScreen4").hide("slide", {direction: "right"}, 1000);
+
+                                                setTimeout(function () {
+                                                    $("#teamf2Sheet").css("visibility", "hidden");
+                                                    state = "playVideo";
+                                                    showLogo();
+                                                },1000);
                                             },800)
                                         },800)
                                     },800);
@@ -390,7 +503,6 @@ function team2Formation(sub, formationDuration, subDuration){
 
         $("#teamf2Sheet").css("visibility", "visible");
     }else{
-        console.log("triggered");
         $("#team1Sheet").slideUp(1000);
         $("#numberClass1").slideUp(1000);
         $("#team2Sheet").slideUp(1000);
@@ -414,6 +526,8 @@ function team2Formation(sub, formationDuration, subDuration){
 
                     setTimeout(function(){
                         $("#teamf2Sheet").css("visibility", "hidden");
+                        state = "playVideo";
+                        showLogo();
                     },1000)
                 },800)
             },800)
@@ -421,6 +535,7 @@ function team2Formation(sub, formationDuration, subDuration){
     }
 }
 
+//Match fixtures
 function matchFixtures(){
     if(state == "fixtures") {
         $("#magentaImg2FM").hide();
@@ -428,6 +543,9 @@ function matchFixtures(){
         $("#magenta2H2FM").hide();
         $("#tableData").hide();
         $(".defFont").hide();
+        $("#orgBy").hide();
+
+        $("#fixtureClass").css("visibility", "visible");
 
         $("#sideScreen3LM").hide().show("slide", {direction: "left"}, 1000);
         $("#sideScreen4LM").hide().show("slide", {direction: "right"}, 1000);
@@ -438,15 +556,13 @@ function matchFixtures(){
             $("#magenta2H2FM").slideDown(800);
 
             $(".defFont").slideDown(800);
+            $("#orgBy").hide();
 
             setTimeout(function(){
                 $("#tableData").slideDown(800);
             },800);
         },1000);
-
-        $("#fixtureClass").css("visibility", "visible");
     }else{
-        console.log("Debugging ::: Run");
         $("#tableData").slideUp(800);
         setTimeout(function(){
             $("#magentaImg2FM").fadeOut(500);
@@ -467,6 +583,7 @@ function matchFixtures(){
     }
 }
 
+//Intro Screen
 function startSys(){
     if(state == "start") {
         $(".startPage").css("visibility", "visible");
@@ -495,7 +612,206 @@ function startSys(){
 
         setTimeout(function(){
             $("#startBack").slideUp(800);
+            setTimeout(function(){
+                $(".startPage").css("visibility", "hidden");
+            },800)
+
         },800);
+    }
+}
+
+//Match Info
+function comingMatch(){
+    if(state === "nextMatch"){
+        $("#nowplTag").hide();
+        $("#nowpldownTag").hide();
+        $("#antiR").hide();
+        $("#team1Div").hide();
+        $("#team2Div").hide();
+        $("#hashTag").hide();
+        $("#magentaImg").hide();
+        $("#magentaH").hide();
+        $("#magentaH2").hide();
+
+        $("#nowPlaying").css("visibility", "visible");
+
+        $("#sideScreen1").hide().show("slide", {direction: "left"}, 1000);
+        $("#sideScreen2").hide().show("slide", {direction: "right"}, 1000);
+
+        setTimeout(function(){
+            $("#magentaImg").fadeIn(500);
+            $("#magentaH").slideDown(800);
+            $("#magentaH2").slideDown(800);
+
+            $("#nowplTag").slideDown(800);
+            $("#nowpldownTag").slideDown(800);
+
+            $("#team1Div").show("slide", {direction: "left"}, 800);
+            $("#team2Div").show("slide", {direction: "right"}, 800);
+
+            setTimeout(function(){
+                $("#antiR").slideDown(800);
+                $("#hashTag").slideDown(800);
+            },800);
+        },1000);
+
+    }else{
+        setTimeout(function(){
+            $("#antiR").slideUp(800);
+            $("#hashTag").slideUp(800);
+            setTimeout(function(){
+                $("#magentaImg").fadeOut(500);
+                $("#magentaH").slideUp(800);
+                $("#magentaH2").slideUp(800);
+
+                $("#nowplTag").slideUp(800);
+                $("#nowpldownTag").slideUp(800);
+
+                $("#team1Div").hide("slide", {direction: "left"}, 800);
+                $("#team2Div").hide("slide", {direction: "right"}, 800);
+
+                setTimeout(function(){
+                    $("#sideScreen1").hide("slide", {direction: "left"}, 1000);
+                    $("#sideScreen2").hide("slide", {direction: "right"}, 1000);
+
+                    setTimeout(function(){
+                        $("#nowPlaying").css("visibility", "hidden");
+                    },1000);
+                },800);
+            },800);
+        },1000);
+    }
+}
+
+//Group Info
+function groupInfo(){
+    if(state === "gInfo"){
+        $("#sideScreen1G").hide();
+        $("#sideScreen2G").hide();
+        $("#magentaImgG").hide();
+        $("#magenta2G").hide();
+        $("#magenta2HG").hide();
+
+        $(".topicTG").hide();
+        $(".topicSG").hide();
+
+        $("#groupTable").hide();
+
+        $("#groupInfo").css("visibility", "visible");
+
+        $("#sideScreen1G").show("slide", {direction: "left"}, 1000);
+        $("#sideScreen2G").show("slide", {direction: "right"}, 1000);
+
+        setTimeout(function (){
+            $("#magentaImgG").fadeIn(500);
+            $("#magenta2G").slideDown(800);
+            $("#magenta2HG").slideDown(800);
+
+            $(".topicTG").slideDown(800);
+            $(".topicSG").slideDown(800);
+
+            setTimeout(function(){
+                $("#groupTable").slideDown(800);
+            },800);
+        },1000);
+    }else{
+        $("#groupTable").slideUp(800);
+
+        setTimeout(function () {
+            $("#magentaImgG").fadeOut(500);
+            $("#magenta2G").slideUp(800);
+            $("#magenta2HG").slideUp(800);
+
+            $(".topicTG").slideUp(800);
+            $(".topicSG").slideUp(800);
+
+            setTimeout(function () {
+                $("#sideScreen1G").hide("slide", {direction: "left"}, 1000);
+                $("#sideScreen2G").hide("slide", {direction: "right"}, 1000);
+
+                setTimeout(function(){
+                    $("#groupInfo").css("visibility", "hidden");
+                },1000);
+            },800);
+        },800);
+    }
+}
+
+
+
+function updateSystem(){
+    //TODO : Add states here to refresh screens
+    state = "none";
+
+    scoreboardFunc();
+    matchFixtures();
+    startSys();
+    comingMatch();
+    groupInfo();
+    showLogo();
+
+    if(recivedData.state === "Start Screen"){
+        console.log("Start Screen");
+
+        setTimeout(function(){
+            state = interpret(recivedData.state);
+            startSys();
+        },5200);
+
+    }else if(recivedData.state === "Scoreboard"){
+        console.log("Scoreboard");
+
+        setTimeout(function(){
+            state = interpret(recivedData.state);
+            scoreboardFunc();
+        },5200);
+
+    }else if(recivedData.state === "Next Match"){
+        console.log("Next Match");
+
+        setTimeout(function(){
+            state = interpret(recivedData.state);
+            comingMatch();
+        },5200);
+
+
+
+    }else if(recivedData.state === "2 Team Lineup"){
+        console.log("2 Team Lineup");
+
+        setTimeout(function(){
+            state = interpret(recivedData.state);
+            team2Formation(true, recivedData.fDuration, recivedData.sDuration);
+        },5200);
+
+    }else if(recivedData.state === "Team Formation"){
+        console.log("Team Formation");
+
+        setTimeout(function(){
+            state = interpret(recivedData.state);
+            teamFormation(recivedData.fDuration, recivedData.sDuration);
+        },5200);
+    }else if(recivedData.state === "Match Fixtures"){
+        console.log("Match Fixtures");
+
+        setTimeout(function(){
+            state = interpret(recivedData.state);
+            matchFixtures();
+        },5200);
+    }else if(recivedData.state === "Group Information"){
+        console.log("Group Information");
+
+        setTimeout(function(){
+            state = interpret(recivedData.state);
+            groupInfo();
+        },5200);
+    }else if(recivedData.state = "Play Video"){
+        console.log("Play Video");
+
+        setTimeout(function(){
+            state = interpret(recivedData.state);
+            showLogo();
+        },5200);
     }
 }
 
@@ -513,13 +829,144 @@ $(function(){
         playVidFunc();
         startSys();
     });
+
+    socket.on("monitor_data",function(data){
+        recivedData = data;
+        isReversed = false;
+
+        if(data.group) {
+            data.group.sort(function (a, b) {
+                if (a.points < b.points) {
+                    return -1;
+                }
+                if (a.points > b.points) {
+                    return 1;
+                }
+                if (a.points == b.points) {
+                    if (a.totalTries - a.triesAgainst < b.totalTries - b.triesAgainst) {
+                        return -1;
+                    }
+                    if (a.totalTries - a.triesAgainst > b.totalTries - b.triesAgainst) {
+                        return 1;
+                    }
+                    if (a.totalTries - a.triesAgainst === b.totalTries - b.triesAgainst) {
+                        if (a.totalTries < b.totalTries) {
+                            return -1;
+                        }
+                        if (a.totalTries > b.totalTries) {
+                            return 1;
+                        }
+                        if (a.totalTries == b.totalTries) {
+                            if (a.triesAgainst > b.triesAgainst) {
+                                return -1;
+                            }
+                            if (a.triesAgainst < b.triesAgainst) {
+                                return 1;
+                            }
+                            if (a.triesAgainst == b.triesAgainst) {
+                                if (a.played < b.played) {
+                                    return -1;
+                                }
+                                if (a.played < b.played) {
+                                    return 1;
+                                }
+                                if (a.played == b.played) {
+                                    if (a.teamName.toUpperCase() < b.teamName.toUpperCase()) {
+                                        return -1;
+                                    }
+                                    if (a.teamName.toUpperCase() < b.teamName.toUpperCase()) {
+                                        return 1;
+                                    }
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+                }
+                console.log("Oops : Something wrong in the Sort");
+                return 0;
+            });
+        }
+
+        if(data.group){
+            data.group.reverse();
+        }
+        console.log(data);
+        updateSystem();
+        $(".clickMe").trigger("click");
+    });
+
+    socket.on("update_time",function(data){
+        if(state === "scoreboard"){
+            sysUpdate = true;
+            sysUpFunc();
+        }
+
+        setTimeout(function(){
+            timerMin = data.time % 60;
+            timerSec = data.time / 60;
+
+            clearInterval(timeCount);
+            startTimer(data.time, document.getElementById("scrClock"));
+            $("#scrState").text(data.state);
+        },1000);
+    });
+
+    socket.on("update_scoreboard_data",function(data){
+        if(state === "scoreboard"){
+            sysUpdate = true;
+            sysUpFunc();
+        }
+
+        setTimeout(function(){
+            console.log("Update Scoreboard Data");
+            $("#scrMatch").text(data.name);
+            $("#scrTeam1").text(data.team1);
+            $("#scrTeam2").text(data.team2);
+            $("#scrScore1").text(data.point1);
+            $("#scrScore2").text(data.point2);
+        },1000);
+    });
+
+    socket.on("update_team1",function(data){
+        recivedTeam1 = data;
+        $(".clickMe").trigger("click");
+    });
+
+    socket.on("update_team2",function(data){
+        recivedTeam2 = data;
+        $(".clickMe").trigger("click");
+    });
+
+    socket.on("pause_timer",function () {
+        clearInterval(timeCount);
+    });
+
+    socket.on("resume_timer",function () {
+        startTimer(timerMin*60+timerSec,document.getElementById("scrClock"));
+    });
+
+    socket.on("update_fixtures",function(fixtures){
+        recivedFixtures = fixtures;
+        $(".clickMe").trigger("click");
+    });
 });
 
 //Submitting monitor name
 $(".register").click(function(){
     var $monitorName = $(".name");
     if(($monitorName).val() != undefined){
-        socket.emit("registerMonitor", $monitorName.val())
+        socket.emit("registerMonitor", $monitorName.val());
     }
 });
 
+app.controller("ScreenController",function($scope){
+    $scope.update = function(){
+        $scope.data = recivedData;
+        $scope.team1 =recivedTeam1;
+        $scope.team2 =recivedTeam2;
+        if(recivedFixtures) {
+            $scope.fixtures = recivedFixtures.fixtures;
+        }
+    };
+});

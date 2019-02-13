@@ -5,3 +5,7 @@
 .monitorStateSelectorHover {
     background-color: darkgray;
 }
+
+.timerClass{
+    font-size: 6em;
+}

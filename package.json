@@ -1,0 +1,19 @@
+{
+  "name": "sevensProject",
+  "version": "0.0.1",
+  "description": "CreatedByLasanthaMadushanSenanayake",
+  "main": "server.js",
+  "private": true,
+  "author": {
+    "name": "Lasantha Madushan Senanayake",
+    "email": "lazantha0@gmail.com"
+  },
+  "dependencies": {
+    "angular": "^1.6.9",
+    "bluebird": "^3.5.0",
+    "bootstrap": "^4.1.0",
+    "express": "*",
+    "mongoose": "*",
+    "socket.io": "*"
+  }
+}

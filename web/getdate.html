@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LM</title>
+</head>
+<body>
+<div id="pickup_date"><p><label class="form">Date Today:</label><input type="date" class="textbox" id="pick_date" name="pickup_date" </p></div>
+
+<div id="dropoff_date"><p><label class="form">Date Due:</label><input type="date" class="textbox" id="drop_date" name="dropoff_date"/></p></div>
+    <button onclick="cal()">Click me</button>
+    <script>
+        function GetDays(){
+            var dropdt = new Date(document.getElementById("drop_date").value);
+            var pickdt = new Date(document.getElementById("pick_date").value);
+            return parseInt((dropdt - pickdt) / (24 * 3600 * 1000));
+        }
+
+        function cal(){
+            if(document.getElementById("drop_date")){
+                alert("Due Date"+GetDays());
+            }
+        }
+    </script>
+</body>
+</html>
